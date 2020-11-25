@@ -16,7 +16,13 @@ var campgroundRoutes = require("./routes/campgrounds"),
 	authRoutes = require("./routes/auth");
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
-mongoose.connect('mongodb://localhost:27017/yelp_camp', {useNewUrlParser: true, useUnifiedTopology: true});
+// OLD MONGOOSE CONNECT: mongodb://localhost:27017/yelp_camp
+mongoose.connect('mongodb+srv://HariDB:2Brother$@cluster0.kakb1.mongodb.net/YelpCamp?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true}).then(() => {
+	console.log("Connected to MongoDB Atlas!");
+}).catch(err => {
+	console.log("Error: ", err.message);
+});
+
 //seedDB();
 app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
